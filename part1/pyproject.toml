@@ -1,0 +1,7 @@
+[project]
+name = "graph-fastcampus-part1"
+version = "0.1.0"
+dependencies = [
+    "neo4j~=5.28",
+    "python-dotenv>=1.0.0",
+]
