@@ -1,0 +1,459 @@
+{
+  "entities": [
+    {
+      "name": "버스",
+      "type": "운송 수단",
+      "properties": {
+        "english_name": "bus",
+        "alias": "뻐스"
+      }
+    },
+    {
+      "name": "운전기사",
+      "type": "직업"
+    },
+    {
+      "name": "시내버스",
+      "type": "운송 수단",
+      "properties": {}
+    },
+    {
+      "name": "시외버스",
+      "type": "운송 수단",
+      "properties": {}
+    },
+    {
+      "name": "고속버스",
+      "type": "운송 수단",
+      "properties": {}
+    },
+    {
+      "name": "관광버스",
+      "type": "운송 수단",
+      "properties": {}
+    },
+    {
+      "name": "프랑스인",
+      "type": "국적"
+    },
+    {
+      "name": "omnibus",
+      "type": "용어",
+      "properties": {
+        "meaning": "모두를 위한"
+      }
+    },
+    {
+      "name": "프랑스 낭트",
+      "type": "장소"
+    },
+    {
+      "name": "옥수수 방앗간 주인",
+      "type": "직업"
+    },
+    {
+      "name": "목욕탕",
+      "type": "시설"
+    },
+    {
+      "name": "셔틀 버스",
+      "type": "운송 수단"
+    },
+    {
+      "name": "1826년",
+      "type": "날짜"
+    },
+    {
+      "name": "마차",
+      "type": "교통수단"
+    },
+    {
+      "name": "대형 모자 가게",
+      "type": "장소"
+    },
+    {
+      "name": "omnes omnibus",
+      "type": "문구"
+    },
+    {
+      "name": "omnes",
+      "type": "라틴어 형용사",
+      "properties": {
+        "meaning": "모든"
+      }
+    },
+    {
+      "name": "bus",
+      "type": "교통수단",
+      "properties": {
+        "meaning": "모두를 위한 탈 것"
+      }
+    },
+    {
+      "name": "대구",
+      "type": "장소",
+      "properties": {}
+    },
+    {
+      "name": "1920년대",
+      "type": "시간",
+      "properties": {
+        "period": "1920년대"
+      }
+    },
+    {
+      "name": "한국",
+      "type": "장소"
+    },
+    {
+      "name": "증기 버스",
+      "type": "개념"
+    },
+    {
+      "name": "영국",
+      "type": "장소"
+    },
+    {
+      "name": "골드워시 거니",
+      "type": "인물"
+    },
+    {
+      "name": "월터 핸코크",
+      "type": "인물"
+    },
+    {
+      "name": "트롤리 버스",
+      "type": "개념"
+    },
+    {
+      "name": "윌리엄",
+      "type": "인물"
+    },
+    {
+      "name": "에른스트 베르너",
+      "type": "인물"
+    },
+    {
+      "name": "일렉트로모트",
+      "type": "차량",
+      "properties": {
+        "english_name": "Electromote"
+      }
+    },
+    {
+      "name": "에른스트 베르너 폰 지멘스",
+      "type": "인물"
+    },
+    {
+      "name": "독일",
+      "type": "장소"
+    },
+    {
+      "name": "할렌제",
+      "type": "장소"
+    },
+    {
+      "name": "전동 버스",
+      "type": "개념",
+      "properties": {}
+    },
+    {
+      "name": "Siegerland",
+      "type": "장소",
+      "properties": {
+        "nationality": "독일"
+      }
+    },
+    {
+      "name": "벤츠 빅토리아",
+      "type": "차량",
+      "properties": {
+        "year": "1893"
+      }
+    },
+    {
+      "name": "2인용 버스",
+      "type": "차량"
+    },
+    {
+      "name": "노선",
+      "type": "개념"
+    },
+    {
+      "name": "6인용 전동 차량",
+      "type": "차량",
+      "properties": {
+        "year": "1895"
+      }
+    },
+    {
+      "name": "대형 버스",
+      "type": "차량"
+    },
+    {
+      "name": "자가용",
+      "type": "차량"
+    },
+    {
+      "name": "준대형 버스",
+      "type": "차량"
+    },
+    {
+      "name": "중형 버스",
+      "type": "차량"
+    },
+    {
+      "name": "마을버스",
+      "type": "차량"
+    },
+    {
+      "name": "소형 버스",
+      "type": "차량",
+      "properties": {
+        "alias": "미니버스, 마이크로버스"
+      }
+    },
+    {
+      "name": "버럭",
+      "type": "차량"
+    },
+    {
+      "name": "트럭",
+      "type": "차량"
+    },
+    {
+      "name": "군용",
+      "type": "용도"
+    },
+    {
+      "name": "일부 동남아시아 국가",
+      "type": "장소"
+    },
+    {
+      "name": "사업용",
+      "type": "용도"
+    }
+  ],
+  "relations": [
+    {
+      "source": "운전기사",
+      "target": "버스",
+      "type": "OPERATES",
+      "properties": {},
+      "evidence": "운전기사가 각 버스마다 배치되어 운행한다."
+    },
+    {
+      "source": "버스",
+      "target": "시내버스",
+      "type": "INCLUDES",
+      "properties": {},
+      "evidence": "시내버스, 시외버스, 고속버스, 관광버스따위가 있다."
+    },
+    {
+      "source": "버스",
+      "target": "시외버스",
+      "type": "INCLUDES",
+      "properties": {},
+      "evidence": "시내버스, 시외버스, 고속버스, 관광버스따위가 있다."
+    },
+    {
+      "source": "버스",
+      "target": "고속버스",
+      "type": "INCLUDES",
+      "properties": {},
+      "evidence": "시내버스, 시외버스, 고속버스, 관광버스따위가 있다."
+    },
+    {
+      "source": "버스",
+      "target": "관광버스",
+      "type": "INCLUDES",
+      "properties": {},
+      "evidence": "시내버스, 시외버스, 고속버스, 관광버스따위가 있다."
+    },
+    {
+      "source": "프랑스인",
+      "target": "omnibus",
+      "type": "NAMED",
+      "properties": {},
+      "evidence": "omnibus라는 이름을 붙여준 사람들은 프랑스인들이다."
+    },
+    {
+      "source": "옥수수 방앗간 주인",
+      "target": "목욕탕",
+      "type": "OPERATES",
+      "properties": {},
+      "evidence": "옥수수 방앗간 주인이 방앗간에서 나오는 부산물인 뜨거운 물로 목욕탕 사업을 시작하게 된다."
+    },
+    {
+      "source": "옥수수 방앗간 주인",
+      "target": "셔틀 버스",
+      "type": "OPERATES",
+      "properties": {
+        "year": "1826"
+      },
+      "evidence": "옥수수 방앗간 주인은 목욕탕 손님을 끌어오기 위해 '(지금의 버스처럼) 많은 사람들을 마차로' 낭트 도심에서부터 목욕탕까지 실어오는 일종의 '셔틀 버스'를 1826년 운행하게 된다."
+    },
+    {
+      "source": "셔틀 버스",
+      "target": "프랑스 낭트",
+      "type": "OPERATES_IN",
+      "properties": {},
+      "evidence": "낭트 도심에서부터 목욕탕까지 실어오는 일종의 '셔틀 버스'를 1826년 운행하게 된다."
+    },
+    {
+      "source": "대형 모자 가게",
+      "target": "마차",
+      "type": "FIRST_STOP_OF",
+      "evidence": "이 '마차'의 첫 정류장이 대형 모자 가게였는데"
+    },
+    {
+      "source": "omnes omnibus",
+      "target": "대형 모자 가게",
+      "type": "WRITTEN_ON_SIGN",
+      "evidence": "그 모자 가게 간판에 'omnes omnibus(모든 사람들을 위한 모든 것들)'라는 문구가 적혀 있었다."
+    },
+    {
+      "source": "omnes omnibus",
+      "target": "마차",
+      "type": "NAMED_AS",
+      "evidence": "사람들은 이 문구 때문에 '목욕탕 셔틀'로 사용되는 '마차'를 점차 omnibus라고 부르게 되었으며"
+    },
+    {
+      "source": "omnes omnibus",
+      "target": "bus",
+      "type": "SHORTENED_TO",
+      "evidence": "따라서 'omnes omnibus'는 '모두를 위한 모든 것'이라고 해석할 수 있다. 즉 omnibus의 줄임말인 bus는 '모두를 위한 탈 것(교통수단)'이라는 의미가 된다."
+    },
+    {
+      "source": "버스",
+      "target": "대구",
+      "type": "FIRST_OPERATED_IN",
+      "properties": {
+        "period": "1920년대"
+      },
+      "evidence": "한국에는 1920년대 대구에서 처음 운행되었다고 한다."
+    },
+    {
+      "source": "월터 핸코크",
+      "target": "증기 버스",
+      "type": "PIONEERED",
+      "properties": {
+        "year": "1830년대",
+        "location": "영국"
+      },
+      "evidence": "증기로 움직이는 일반적인 도시 간 버스 서비스는 1830년대 영국에서 골드워시 거니 등과 함께 월터 핸코크가 개척하였다."
+    },
+    {
+      "source": "윌리엄",
+      "target": "트롤리 버스",
+      "type": "DEVELOPED",
+      "evidence": "잉글랜드의 윌리엄과 독일의 에른스트 베르너가 트롤리버스 개념을 발전시키는 일에 협업했다."
+    },
+    {
+      "source": "에른스트 베르너",
+      "target": "트롤리 버스",
+      "type": "DEVELOPED",
+      "evidence": "잉글랜드의 윌리엄과 독일의 에른스트 베르너가 트롤리버스 개념을 발전시키는 일에 협업했다."
+    },
+    {
+      "source": "에른스트 베르너 폰 지멘스",
+      "target": "일렉트로모트",
+      "type": "DEVELOPED",
+      "properties": {
+        "year": "1882",
+        "location": "독일 할렌제"
+      },
+      "evidence": "최초의 차량 일렉트로모트(Electromote)가 에른스트 베르너 폰 지멘스에 의해 개발되었고 1882년 독일 할렌제에 대중에게 제공되었다."
+    },
+    {
+      "source": "벤츠 빅토리아",
+      "target": "전동 버스",
+      "type": "DEVELOPED",
+      "properties": {
+        "year": "1893"
+      },
+      "evidence": "1895년 6인용 전동 차량이 1893년 벤츠 빅토리아에서 개발되었다."
+    },
+    {
+      "source": "2인용 버스",
+      "target": "노선",
+      "type": "OPERATED_ON",
+      "properties": {
+        "duration": "단기간"
+      },
+      "evidence": "독일 Siegerland에서 2인용 버스간의 노선이 단기간 운영되었고"
+    },
+    {
+      "source": "벤츠 빅토리아",
+      "target": "6인용 전동 차량",
+      "type": "DEVELOPED",
+      "properties": {
+        "year": "1895"
+      },
+      "evidence": "1895년 6인용 전동 차량이 1893년 벤츠 빅토리아에서 개발되었다."
+    },
+    {
+      "source": "대형 버스",
+      "target": "고속버스",
+      "type": "USED_AS",
+      "evidence": "대형 버스 : 주로 고속버스, 시외버스, 관광버스 등으로 사용한다."
+    },
+    {
+      "source": "대형 버스",
+      "target": "시외버스",
+      "type": "USED_AS",
+      "evidence": "대형 버스 : 주로 고속버스, 시외버스, 관광버스 등으로 사용한다."
+    },
+    {
+      "source": "대형 버스",
+      "target": "관광버스",
+      "type": "USED_AS",
+      "evidence": "대형 버스 : 주로 고속버스, 시외버스, 관광버스 등으로 사용한다."
+    },
+    {
+      "source": "대형 버스",
+      "target": "자가용",
+      "type": "USED_AS",
+      "evidence": "하지만 자가용으로 사용되는 경우도 많다."
+    },
+    {
+      "source": "준대형 버스",
+      "target": "시내버스",
+      "type": "USED_AS",
+      "evidence": "준대형 버스 : 주로 시내버스로 사용한다."
+    },
+    {
+      "source": "중형 버스",
+      "target": "마을버스",
+      "type": "USED_AS",
+      "evidence": "중형 버스 : 주로 마을버스로 사용한다."
+    },
+    {
+      "source": "중형 버스",
+      "target": "자가용",
+      "type": "USED_AS",
+      "evidence": "하지만 자가용으로 사용되는 경우도 많다."
+    },
+    {
+      "source": "버럭",
+      "target": "트럭",
+      "type": "CONVERTED_FROM",
+      "evidence": "버럭 : 버스와 트럭의 합성어로 본래 트럭이었던 차량을 버스로 개조한 차량이며"
+    },
+    {
+      "source": "버럭",
+      "target": "군용",
+      "type": "USED_AS",
+      "evidence": "군용으로 많이 사용된다."
+    },
+    {
+      "source": "버럭",
+      "target": "사업용",
+      "type": "USED_AS",
+      "properties": {
+        "location": "일부 동남아시아 국가"
+      },
+      "evidence": "일부 동남아시아 국가에서는 사업용으로도 쓰인다."
+    }
+  ]
+}

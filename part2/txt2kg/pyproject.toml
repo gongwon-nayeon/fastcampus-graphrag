@@ -1,0 +1,9 @@
+[project]
+name = "graph-fastcampus-part2-txt2kg"
+version = "0.1.0"
+dependencies = [
+    "neo4j~=5.28",
+    "python-dotenv>=1.0.0",
+    "openai>=2.0.0",
+    "langchain-text-splitters>=1.1.0",
+]
