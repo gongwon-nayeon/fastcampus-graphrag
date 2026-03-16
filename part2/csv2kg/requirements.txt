@@ -1,0 +1,4 @@
+neo4j==5.28.3
+python-dotenv==1.2.1
+pandas==3.0.0
+ipykernel==7.2.0

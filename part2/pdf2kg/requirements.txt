@@ -1,0 +1,8 @@
+neo4j==5.28.3
+python-dotenv==1.2.1
+openai==2.20.0
+langchain-text-splitters==1.1.0
+PyMuPDF==1.26.7
+pillow==11.3.0
+docling==2.72.0
+docling-hierarchical-pdf==0.1.3
