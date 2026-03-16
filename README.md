@@ -7,12 +7,18 @@ Python version: 3.13
  ┣ 📂part1
  ┃ ┗ ch2_python_neo4j.py
  ┣ 📂part2
- ┃ ┗ 📂txt2kg
- ┃    ┗ txt2kg.py
+ ┃ ┣ 📂txt2kg
+ ┃ ┣ 📂csv2kg
+ ┃ ┣ 📂pdf2kg
+ ┃ ┣ 📂law2kg
+ ┃ ┣ 📂retail2kg
+ ┃ ┗ 📂medical2kg
+ ┣ 📂part3
+ ┃ ┗ 📂text2cypher
  ┗ 📜README.md
  ```
-- 1차 오픈 (2/23)
-- 2차 오픈 (3/30)
+- 1차 오픈 (2/23) ✓
+- 2차 오픈 (3/30) ✓
 - 3차 오픈 (4/27)
 - 최종 오픈 (5/27)
 
