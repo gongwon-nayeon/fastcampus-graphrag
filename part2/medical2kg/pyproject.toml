@@ -1,0 +1,12 @@
+[project]
+name = "graph-fastcampus-part2-medical2kg"
+version = "0.1.0"
+dependencies = [
+    "neo4j~=5.28",
+    "python-dotenv>=1.0.0",
+    "openai>=2.0.0",
+    "matplotlib>=3.7.0",
+    "seaborn>=0.12.0",
+    "jupyter>=1.0.0",
+    "ipykernel>=6.0.0",
+]
