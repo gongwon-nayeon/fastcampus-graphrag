@@ -58,21 +58,6 @@ def print_interpretation_statistics(driver):
     for record in result.records:
         print(f"  → {record['target_type']}: {record['cnt']}개")
 
-    # 결론 유형별 통계
-    print("\n결론 유형 분포:")
-    conclusion_query = """
-    MATCH (a:Answer)
-    WHERE a.conclusion_result IS NOT NULL
-    RETURN a.conclusion_result as result, count(*) as cnt
-    ORDER BY cnt DESC
-    """
-    try:
-        result = driver.execute_query(conclusion_query, database_="neo4j")
-        for record in result.records:
-            print(f"  {record['result']}: {record['cnt']}개")
-    except Exception as e:
-        print(f"  (결론 통계 없음: {str(e)[:30]}...)")
-
     print("=" * 50)
 
 
