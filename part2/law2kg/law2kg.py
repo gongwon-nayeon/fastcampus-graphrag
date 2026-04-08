@@ -9,6 +9,13 @@ from law_api import fetch_law_list, fetch_law_detail
 
 
 # ============================================
+# 환경 변수 설정
+# ============================================
+
+NEO4J_DATABASE = os.getenv('NEO4J_USERNAME')  # Neo4j 데이터베이스명
+
+
+# ============================================
 # Neo4j 제약조건 설정
 # ============================================
 
@@ -28,7 +35,7 @@ def setup_neo4j(driver):
 
     for constraint in constraints:
         try:
-            driver.execute_query(constraint, database_="neo4j")
+            driver.execute_query(constraint, database_=NEO4J_DATABASE)
             print(f"✓ {constraint[:50]}...")
         except Exception as e:
             print(f"ERROR: {str(e)}")
@@ -246,7 +253,7 @@ def create_law_node(driver, law_data: Dict[str, Any]):
         'status': law_data.get('법령상태') or '시행',
     }
 
-    driver.execute_query(cypher, params, database_="neo4j")
+    driver.execute_query(cypher, params, database_=NEO4J_DATABASE)
 
 
 def create_article_structure(driver, law_id: str, articles: List[Dict[str, Any]]):
@@ -290,7 +297,7 @@ def create_article_structure(driver, law_id: str, articles: List[Dict[str, Any]]
             'order': order,
         }
 
-        driver.execute_query(cypher_article, params_article, database_="neo4j")
+        driver.execute_query(cypher_article, params_article, database_=NEO4J_DATABASE)
 
         # 항(Paragraph) 처리
         paragraphs = article_data.get('paragraphs', [])
@@ -324,7 +331,7 @@ def create_article_structure(driver, law_id: str, articles: List[Dict[str, Any]]
                 'order': p_order,
             }
 
-            driver.execute_query(cypher_para, params_para, database_="neo4j")
+            driver.execute_query(cypher_para, params_para, database_=NEO4J_DATABASE)
 
             # 호(Item) 처리
             items = para_data.get('items', [])
@@ -358,7 +365,7 @@ def create_article_structure(driver, law_id: str, articles: List[Dict[str, Any]]
                     'order': i_order,
                 }
 
-                driver.execute_query(cypher_item, params_item, database_="neo4j")
+                driver.execute_query(cypher_item, params_item, database_=NEO4J_DATABASE)
 
     # NEXT_ARTICLE 관계 생성 (순차적 연결)
     cypher_next = """
@@ -370,7 +377,7 @@ def create_article_structure(driver, law_id: str, articles: List[Dict[str, Any]]
     MERGE (current)-[:NEXT_ARTICLE]->(next)
     """
 
-    driver.execute_query(cypher_next, {'law_id': law_id}, database_="neo4j")
+    driver.execute_query(cypher_next, {'law_id': law_id}, database_=NEO4J_DATABASE)
 
 
 def build_law_graph(driver, api_key: str, max_laws: int = 10):
@@ -497,7 +504,7 @@ def create_interpretation_node(driver, interp_summary: Dict[str, Any], interp_de
         'interpretation_id': interp_id,
         'title': title,
         'case_number': case_number,
-    }, database_="neo4j")
+    }, database_=NEO4J_DATABASE)
 
     # 2. Question 노드 생성
     if question_text:
@@ -514,7 +521,7 @@ def create_interpretation_node(driver, interp_summary: Dict[str, Any], interp_de
             'interpretation_id': interp_id,
             'question_id': f"{interp_id}-Q",
             'text': question_text,
-        }, database_="neo4j")
+        }, database_=NEO4J_DATABASE)
 
     # 3. Answer 노드 생성 및 Question과 연결
     if answer_text:
@@ -538,7 +545,7 @@ def create_interpretation_node(driver, interp_summary: Dict[str, Any], interp_de
             'interpretation_id': interp_id,
             'answer_id': f"{interp_id}-A",
             'text': answer_text,
-        }, database_="neo4j")
+        }, database_=NEO4J_DATABASE)
 
     # 4. Reason 노드 생성
     if reason_text:
@@ -561,7 +568,7 @@ def create_interpretation_node(driver, interp_summary: Dict[str, Any], interp_de
             'interpretation_id': interp_id,
             'reason_id': f"{interp_id}-R",
             'text': reason_text,
-        }, database_="neo4j")
+        }, database_=NEO4J_DATABASE)
 
     # LLM으로 인용된 법령 및 조문 추출
     all_text = f"{question_text or ''} {answer_text or ''} {reason_text or ''}"
@@ -615,7 +622,7 @@ def link_cited_articles(driver, interp_id: str, citations: List[Dict[str, str]])
             result = driver.execute_query(cypher_article, {
                 'interp_id': interp_id,
                 'article_number': article_num,
-            }, database_="neo4j")
+            }, database_=NEO4J_DATABASE)
 
             if result.records:
                 link_desc = f"제{article_num}조"
@@ -637,7 +644,7 @@ def link_cited_articles(driver, interp_id: str, citations: List[Dict[str, str]])
                         'interp_id': interp_id,
                         'article_number': article_num,
                         'paragraph_number': int(paragraph_num),
-                    }, database_="neo4j")
+                    }, database_=NEO4J_DATABASE)
 
                     if para_result.records:
                         link_desc += f"제{paragraph_num}항"
@@ -663,7 +670,7 @@ def link_cited_articles(driver, interp_id: str, citations: List[Dict[str, str]])
                             'article_number': article_num,
                             'paragraph_number': int(paragraph_num),
                             'item_number': int(item_num),
-                        }, database_="neo4j")
+                        }, database_=NEO4J_DATABASE)
                     else:
                         # Paragraph 없이 Item만 있는 경우 (Article 바로 아래)
                         cypher_item = """
@@ -682,7 +689,7 @@ def link_cited_articles(driver, interp_id: str, citations: List[Dict[str, str]])
                             'interp_id': interp_id,
                             'article_number': article_num,
                             'item_number': int(item_num),
-                        }, database_="neo4j")
+                        }, database_=NEO4J_DATABASE)
 
                     if item_result and item_result.records:
                         link_desc += f"제{item_num}호"
@@ -724,7 +731,7 @@ def link_organizations(driver, interp_data: Dict[str, Any]):
             'org_code': interp_data.get('질의기관코드'),
             'interp_id': interp_id,
             'date': question_date,
-        }, database_="neo4j")
+        }, database_=NEO4J_DATABASE)
 
     # 회신기관
     if answer_org:
@@ -750,7 +757,7 @@ def link_organizations(driver, interp_data: Dict[str, Any]):
             'org_code': interp_data.get('회신기관코드'),
             'interp_id': interp_id,
             'date': answer_date,
-        }, database_="neo4j")
+        }, database_=NEO4J_DATABASE)
 
 
 def link_to_law(driver, interp_data: Dict[str, Any], interp_detail: Dict[str, Any] = None):
@@ -804,7 +811,7 @@ def link_to_law(driver, interp_data: Dict[str, Any], interp_detail: Dict[str, An
         RETURN l.law_id as law_id, l.name as name, l.short_name as short_name
         """
 
-        result_laws = driver.execute_query(cypher_get_laws, database_="neo4j")
+        result_laws = driver.execute_query(cypher_get_laws, database_=NEO4J_DATABASE)
 
         for law_record in result_laws.records:
             law_id = law_record['law_id']
@@ -835,7 +842,7 @@ def link_to_law(driver, interp_data: Dict[str, Any], interp_detail: Dict[str, An
                 link_result = driver.execute_query(cypher_link, {
                     'interp_id': interp_id,
                     'law_id': law_id,
-                }, database_="neo4j")
+                }, database_=NEO4J_DATABASE)
 
                 if link_result.records:
                     print(f"    - 법령 매칭: {law_name[:30]}")
@@ -859,7 +866,7 @@ def link_cited_laws(driver, interp_id: str, other_laws: List[str]):
     RETURN l.law_id as law_id, l.name as name, l.short_name as short_name
     """
 
-    result_laws = driver.execute_query(cypher_get_laws, database_="neo4j")
+    result_laws = driver.execute_query(cypher_get_laws, database_=NEO4J_DATABASE)
 
     cited_count = 0
 
@@ -897,7 +904,7 @@ def link_cited_laws(driver, interp_id: str, other_laws: List[str]):
                 cite_result = driver.execute_query(cypher_cite, {
                     'interp_id': interp_id,
                     'law_id': law_id,
-                }, database_="neo4j")
+                }, database_=NEO4J_DATABASE)
 
                 if cite_result.records:
                     cited_count += 1
@@ -921,7 +928,7 @@ def build_interpretation_graph(driver, api_key: str, max_interpretations: int = 
     ORDER BY l.name
     """
 
-    result = driver.execute_query(cypher_laws, database_="neo4j")
+    result = driver.execute_query(cypher_laws, database_=NEO4J_DATABASE)
     if not result.records:
         print("ERROR: 그래프에 법령이 없습니다. 먼저 step1_load_laws.py를 실행하세요.")
         return

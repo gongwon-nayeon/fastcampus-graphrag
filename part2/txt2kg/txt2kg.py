@@ -8,6 +8,12 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 load_dotenv()
 
+# ============================================
+# 환경 변수 설정
+# ============================================
+
+NEO4J_DATABASE = os.getenv("NEO4J_USERNAME")  # 데이터베이스명
+
 
 # ============================================
 # 1단계: 텍스트 청킹
@@ -285,7 +291,7 @@ def save_to_neo4j(kg, driver):
         # 1. 기존 데이터 삭제
         driver.execute_query(
             "MATCH (n) DETACH DELETE n",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         )
         print("  기존 데이터 삭제 완료")
 
@@ -309,7 +315,7 @@ def save_to_neo4j(kg, driver):
 
             return created_count
 
-        with driver.session(database="neo4j") as session:
+        with driver.session(database=NEO4J_DATABASE) as session:
             node_count = session.execute_write(create_nodes, entities)
             print(f"  {node_count}개 노드 생성 완료")
 
@@ -337,7 +343,7 @@ def save_to_neo4j(kg, driver):
 
             return created_count
 
-        with driver.session(database="neo4j") as session:
+        with driver.session(database=NEO4J_DATABASE) as session:
             rel_count = session.execute_write(create_relations, relations)
             print(f"  {rel_count}개 관계 생성 완료")
 

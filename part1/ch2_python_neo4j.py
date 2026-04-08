@@ -7,6 +7,7 @@ load_dotenv()
 URI = os.getenv("NEO4J_URI")
 USERNAME = os.getenv("NEO4J_USERNAME")
 PASSWORD = os.getenv("NEO4J_PASSWORD")
+NEO4J_DATABASE = USERNAME  # 데이터베이스명
 
 driver = GraphDatabase.driver(URI, auth=(USERNAME, PASSWORD))
 driver.verify_connectivity()
@@ -20,7 +21,7 @@ records, summary, keys = driver.execute_query("""
     RETURN q.title AS title, u.display_name AS author
     LIMIT 5
     """,
-    database_="neo4j",
+    database_=NEO4J_DATABASE,
     tagName="neo4j",
     routing_=RoutingControl.READ # 읽기 전용 쿼리
 )
@@ -50,7 +51,7 @@ records, summary, keys = driver.execute_query(
     questionId=999999,
     title="질문의 제목입니다.",
     body="질문의 본문입니다.",
-    database_="neo4j",
+    database_=NEO4J_DATABASE,
 )
 
 if records:
@@ -81,7 +82,7 @@ def get_questions(tx, tag_name): # tx : 트랜잭션 객체
 
     return [record.data() for record in result]
 
-with driver.session(database="neo4j") as session:
+with driver.session(database=NEO4J_DATABASE) as session:
     records = session.execute_read(get_questions, "neo4j")
     for record in records:
         print(record)

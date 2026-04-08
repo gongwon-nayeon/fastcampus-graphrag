@@ -8,6 +8,18 @@ from law2kg import (
     build_law_graph
 )
 
+# ============================================
+# 환경 변수 설정
+# ============================================
+
+load_dotenv()
+
+NEO4J_URI = os.getenv('NEO4J_URI')
+NEO4J_USER = os.getenv('NEO4J_USERNAME')
+NEO4J_PASSWORD = os.getenv('NEO4J_PASSWORD')
+NEO4J_DATABASE = NEO4J_USER
+LAW_API_KEY = os.getenv('LAW_API_KEY')
+
 
 def print_law_statistics(driver):
     """법령 그래프 통계 출력 (step1용)"""
@@ -25,7 +37,7 @@ def print_law_statistics(driver):
 
     print("\n노드:")
     for label, query in stats:
-        result = driver.execute_query(query, database_="neo4j")
+        result = driver.execute_query(query, database_=NEO4J_DATABASE)
         count = result.records[0]['cnt']
         print(f"  {label}: {count}개")
 
@@ -39,7 +51,7 @@ def print_law_statistics(driver):
     ]
 
     for label, query in rel_stats:
-        result = driver.execute_query(query, database_="neo4j")
+        result = driver.execute_query(query, database_=NEO4J_DATABASE)
         count = result.records[0]['cnt']
         print(f"  {label}: {count}개")
 
@@ -51,7 +63,7 @@ def print_law_statistics(driver):
     ORDER BY article_count DESC
     LIMIT 5
     """
-    result = driver.execute_query(law_article_query, database_="neo4j")
+    result = driver.execute_query(law_article_query, database_=NEO4J_DATABASE)
     for record in result.records:
         print(f"  {record['law_name']}: {record['article_count']}개")
 
@@ -59,18 +71,11 @@ def print_law_statistics(driver):
 
 
 if __name__ == "__main__":
-    load_dotenv()
-
     print("=" * 50)
     print("법령 지식 그래프 구축 - (1) 현행법령 적재")
     print("=" * 50)
 
     max_laws = 10
-
-    NEO4J_URI = os.getenv('NEO4J_URI')
-    NEO4J_USER = os.getenv('NEO4J_USERNAME')
-    NEO4J_PASSWORD = os.getenv('NEO4J_PASSWORD')
-    LAW_API_KEY = os.getenv('LAW_API_KEY')
 
     if not NEO4J_URI or not NEO4J_USER or not NEO4J_PASSWORD:
         print("\n오류: Neo4j 연결 정보가 설정되지 않았습니다")

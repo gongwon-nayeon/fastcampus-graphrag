@@ -6,6 +6,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# ============================================
+# 환경 변수 설정
+# ============================================
+
+NEO4J_DATABASE = os.getenv("NEO4J_USERNAME")  # 데이터베이스명
+
 
 # ============================================
 # 1단계: Neo4j 연결
@@ -34,7 +40,7 @@ def clear_database(driver):
     """
     driver.execute_query(
         "MATCH (n) DETACH DELETE n",
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     )
     print("기존 데이터 삭제 완료")
 
@@ -51,7 +57,7 @@ def create_constraints(driver):
     ]
 
     for constraint in constraints:
-        driver.execute_query(constraint, database_="neo4j")
+        driver.execute_query(constraint, database_=NEO4J_DATABASE)
 
     print("제약조건 생성 완료")
 
@@ -87,7 +93,7 @@ def load_passenger_nodes(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.nodes_created
@@ -113,7 +119,7 @@ def load_pclass_nodes(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.nodes_created
@@ -137,7 +143,7 @@ def load_cabin_nodes(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.nodes_created
@@ -162,7 +168,7 @@ def load_port_nodes(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.nodes_created
@@ -190,7 +196,7 @@ def create_traveled_in_relationships(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.relationships_created
@@ -214,7 +220,7 @@ def create_stayed_in_relationships(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.relationships_created
@@ -237,7 +243,7 @@ def create_embarked_at_relationships(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.relationships_created
@@ -265,7 +271,7 @@ def create_traveled_with_relationships(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.relationships_created
@@ -281,19 +287,19 @@ def print_graph_statistics(driver):
     node_counts = {
         "Passenger": driver.execute_query(
             "MATCH (n:Passenger) RETURN count(n) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "PClass": driver.execute_query(
             "MATCH (n:PClass) RETURN count(n) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "Cabin": driver.execute_query(
             "MATCH (n:Cabin) RETURN count(n) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "Port": driver.execute_query(
             "MATCH (n:Port) RETURN count(n) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"]
     }
 
@@ -301,19 +307,19 @@ def print_graph_statistics(driver):
     rel_counts = {
         "TRAVELED_IN": driver.execute_query(
             "MATCH ()-[r:TRAVELED_IN]->() RETURN count(r) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "STAYED_IN": driver.execute_query(
             "MATCH ()-[r:STAYED_IN]->() RETURN count(r) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "EMBARKED_AT": driver.execute_query(
             "MATCH ()-[r:EMBARKED_AT]->() RETURN count(r) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "TRAVELED_WITH": driver.execute_query(
             "MATCH ()-[r:TRAVELED_WITH]->() RETURN count(r) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"]
     }
 

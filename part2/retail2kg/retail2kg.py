@@ -6,6 +6,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# ============================================
+# 환경 변수 설정
+# ============================================
+
+NEO4J_DATABASE = os.getenv("NEO4J_USERNAME")  # 데이터베이스명
+
 
 # ============================================
 # 1단계: Neo4j 연결
@@ -34,7 +40,7 @@ def clear_database(driver):
     """
     driver.execute_query(
         "MATCH (n) DETACH DELETE n",
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     )
     print("기존 데이터 삭제 완료")
 
@@ -55,7 +61,7 @@ def create_constraints(driver):
     ]
 
     for constraint in constraints:
-        driver.execute_query(constraint, database_="neo4j")
+        driver.execute_query(constraint, database_=NEO4J_DATABASE)
 
     print("제약조건 생성 완료")
 
@@ -105,7 +111,7 @@ def load_article_nodes(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.nodes_created
@@ -135,7 +141,7 @@ def load_customer_nodes(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.nodes_created
@@ -160,7 +166,7 @@ def load_product_type_nodes(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.nodes_created
@@ -184,7 +190,7 @@ def load_product_group_nodes(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.nodes_created
@@ -209,7 +215,7 @@ def load_colour_group_nodes(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.nodes_created
@@ -234,7 +240,7 @@ def load_department_nodes(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.nodes_created
@@ -259,7 +265,7 @@ def load_section_nodes(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.nodes_created
@@ -284,7 +290,7 @@ def load_garment_group_nodes(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.nodes_created
@@ -324,7 +330,7 @@ def create_purchased_relationships(driver, csv_path):
         summary = driver.execute_query(
             query,
             records=records,
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).summary
 
         count = summary.counters.relationships_created
@@ -356,7 +362,7 @@ def create_of_type_relationships(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.relationships_created
@@ -380,7 +386,7 @@ def create_in_group_relationships(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.relationships_created
@@ -404,7 +410,7 @@ def create_has_colour_relationships(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.relationships_created
@@ -428,7 +434,7 @@ def create_in_department_relationships(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.relationships_created
@@ -452,7 +458,7 @@ def create_in_section_relationships(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.relationships_created
@@ -476,7 +482,7 @@ def create_in_garment_group_relationships(driver, csv_path):
     summary = driver.execute_query(
         query,
         records=records,
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     ).summary
 
     count = summary.counters.relationships_created
@@ -492,35 +498,35 @@ def print_graph_statistics(driver):
     node_counts = {
         "Article": driver.execute_query(
             "MATCH (n:Article) RETURN count(n) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "Customer": driver.execute_query(
             "MATCH (n:Customer) RETURN count(n) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "ProductType": driver.execute_query(
             "MATCH (n:ProductType) RETURN count(n) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "ProductGroup": driver.execute_query(
             "MATCH (n:ProductGroup) RETURN count(n) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "ColourGroup": driver.execute_query(
             "MATCH (n:ColourGroup) RETURN count(n) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "Department": driver.execute_query(
             "MATCH (n:Department) RETURN count(n) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "Section": driver.execute_query(
             "MATCH (n:Section) RETURN count(n) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "GarmentGroup": driver.execute_query(
             "MATCH (n:GarmentGroup) RETURN count(n) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"]
     }
 
@@ -528,31 +534,31 @@ def print_graph_statistics(driver):
     rel_counts = {
         "PURCHASED": driver.execute_query(
             "MATCH ()-[r:PURCHASED]->() RETURN count(r) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "OF_TYPE": driver.execute_query(
             "MATCH ()-[r:OF_TYPE]->() RETURN count(r) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "IN_GROUP": driver.execute_query(
             "MATCH ()-[r:IN_GROUP]->() RETURN count(r) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "HAS_COLOUR": driver.execute_query(
             "MATCH ()-[r:HAS_COLOUR]->() RETURN count(r) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "IN_DEPARTMENT": driver.execute_query(
             "MATCH ()-[r:IN_DEPARTMENT]->() RETURN count(r) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "IN_SECTION": driver.execute_query(
             "MATCH ()-[r:IN_SECTION]->() RETURN count(r) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"],
         "IN_GARMENT_GROUP": driver.execute_query(
             "MATCH ()-[r:IN_GARMENT_GROUP]->() RETURN count(r) AS count",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         ).records[0]["count"]
     }
 

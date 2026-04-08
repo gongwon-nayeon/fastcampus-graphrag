@@ -12,6 +12,12 @@ from openai import OpenAI
 
 load_dotenv()
 
+# ============================================
+# 환경 변수 설정
+# ============================================
+
+NEO4J_DATABASE = os.getenv("NEO4J_USERNAME")
+
 DEPARTMENTS = ["내과", "산부인과", "소아청소년과", "응급의학과"]
 DATA_DIR = Path("data")
 OUTPUT_DIR = Path("output")
@@ -186,7 +192,7 @@ def save_qa_graph_to_neo4j(all_qa_data: Dict[str, List[Dict]], driver):
     # 1. 기존 데이터 삭제
     driver.execute_query(
         "MATCH (n) DETACH DELETE n",
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     )
     print(f"      step 1 - 기존 데이터 삭제")
 
@@ -195,7 +201,7 @@ def save_qa_graph_to_neo4j(all_qa_data: Dict[str, List[Dict]], driver):
         driver.execute_query(
             "CREATE (d:Department {name: $name})",
             name=dept,
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         )
     print(f"      step 2 - Department 노드 {len(DEPARTMENTS)}개 생성")
 
@@ -224,7 +230,7 @@ def save_qa_graph_to_neo4j(all_qa_data: Dict[str, List[Dict]], driver):
                 WITH q, qa
                 MATCH (d:Department {name: qa.department})
                 CREATE (q)-[:BELONGS_TO]->(d)
-            """, batch=batch, database_="neo4j")
+            """, batch=batch, database_=NEO4J_DATABASE)
 
             created += len(batch)
 
@@ -461,7 +467,7 @@ def save_graph_to_neo4j(all_results: Dict[int, Dict], driver):
             driver.execute_query(f"""
                 UNWIND $batch AS entity
                 MERGE (e:{label} {{name: entity.name}})
-            """, batch=batch, database_="neo4j")
+            """, batch=batch, database_=NEO4J_DATABASE)
 
         total_entities += len(entities)
         print(f"         {label}: {len(entities)}개")
@@ -474,16 +480,16 @@ def save_graph_to_neo4j(all_results: Dict[int, Dict], driver):
         label = entity_type.capitalize()
         driver.execute_query(
             f"CREATE INDEX {entity_type}_name_idx IF NOT EXISTS FOR (e:{label}) ON (e.name)",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         )
 
     driver.execute_query(
         "CREATE INDEX question_qa_id_idx IF NOT EXISTS FOR (q:Question) ON (q.qa_id)",
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     )
     driver.execute_query(
         "CREATE INDEX answer_qa_id_idx IF NOT EXISTS FOR (a:Answer) ON (a.qa_id)",
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     )
     print(f"      step 2 - 인덱스 생성 ({len(entity_types)}개 엔티티 타입)")
 
@@ -524,7 +530,7 @@ def save_graph_to_neo4j(all_results: Dict[int, Dict], driver):
                     MATCH (q:Question {{qa_id: data.qa_id}})
                     MATCH (e:{label} {{name: data.name}})
                     MERGE (q)-[:MENTIONS]->(e)
-                """, batch=batch, database_="neo4j")
+                """, batch=batch, database_=NEO4J_DATABASE)
 
         print(f"      step 3 - MENTIONS 관계 {len(mentions_data)}개 생성 완료")
 
@@ -590,7 +596,7 @@ def save_graph_to_neo4j(all_results: Dict[int, Dict], driver):
                                 WHEN rel.qa_id IN r.qa_ids THEN r.qa_ids
                                 ELSE r.qa_ids + rel.qa_id
                             END
-                    """, batch=batch, database_="neo4j")
+                    """, batch=batch, database_=NEO4J_DATABASE)
                     total_created += len(batch)
 
         print(f"      step 4 - 엔티티 간 관계 {total_created}개 생성 완료")
