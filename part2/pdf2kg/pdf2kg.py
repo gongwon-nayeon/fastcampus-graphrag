@@ -16,6 +16,12 @@ from docling_core.types.doc import SectionHeaderItem, TextItem, TableItem
 load_dotenv()
 
 # ============================================
+# 환경 변수 설정
+# ============================================
+
+NEO4J_DATABASE = os.getenv("NEO4J_USERNAME")
+
+# ============================================
 # 데이터 클래스
 # ============================================
 
@@ -403,7 +409,7 @@ def save_to_neo4j(doc_structure: DocumentStructure, uri, user, password):
         # 1. 기존 데이터 삭제
         driver.execute_query(
             "MATCH (n) DETACH DELETE n",
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         )
         print("   step 1 - 기존 데이터 삭제")
 
@@ -419,7 +425,7 @@ def save_to_neo4j(doc_structure: DocumentStructure, uri, user, password):
             title=doc_structure.title,
             pdf_path=doc_structure.pdf_path,
             total_pages=doc_structure.total_pages,
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         )
         print(f"   step 2 - Document 노드 생성")
 
@@ -449,7 +455,7 @@ def save_to_neo4j(doc_structure: DocumentStructure, uri, user, password):
                        page_start=node.page_start)
             return len(toc_list)
 
-        with driver.session(database="neo4j") as session:
+        with driver.session(database=NEO4J_DATABASE) as session:
             toc_count = session.execute_write(create_toc_nodes, doc_structure.toc)
             print(f"   step 3 - TOC 노드 {toc_count}개 생성")
 
@@ -460,7 +466,7 @@ def save_to_neo4j(doc_structure: DocumentStructure, uri, user, password):
             WHERE child.parent_id = parent.toc_id
             CREATE (parent)-[:HAS_CHILD]->(child)
             """,
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         )
         print(f"   step 4 - TOC 관계 생성")
 
@@ -497,7 +503,7 @@ def save_to_neo4j(doc_structure: DocumentStructure, uri, user, password):
                 """, **chunk)
             return len(chunks)
 
-        with driver.session(database="neo4j") as session:
+        with driver.session(database=NEO4J_DATABASE) as session:
             chunk_count = session.execute_write(create_chunk_nodes, chunks_to_create)
             print(f"   step 5 - Chunk 노드 {chunk_count}개 생성")
 
@@ -508,7 +514,7 @@ def save_to_neo4j(doc_structure: DocumentStructure, uri, user, password):
             WHERE c.toc_id = toc.toc_id
             CREATE (toc)-[:HAS_CHUNK]->(c)
             """,
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         )
         print(f"   step 6 - TOC-Chunk 관계 생성")
 
@@ -525,7 +531,7 @@ def save_to_neo4j(doc_structure: DocumentStructure, uri, user, password):
                 })
             """, texts=texts_batch)
 
-        with driver.session(database="neo4j") as session:
+        with driver.session(database=NEO4J_DATABASE) as session:
             for i in range(0, len(doc_structure.texts), 100):
                 batch = doc_structure.texts[i:i+100]
                 batch_data = [{
@@ -554,7 +560,7 @@ def save_to_neo4j(doc_structure: DocumentStructure, uri, user, password):
                          page=table.page,
                          content=table.content)
 
-            with driver.session(database="neo4j") as session:
+            with driver.session(database=NEO4J_DATABASE) as session:
                 session.execute_write(create_table_elements, doc_structure.tables)
             print(f"   step 8 - TableElement 노드 {len(doc_structure.tables)}개 생성")
 
@@ -566,7 +572,7 @@ def save_to_neo4j(doc_structure: DocumentStructure, uri, user, password):
             CREATE (c)-[:HAS_ELEMENT]->(t)
             RETURN count(*) as cnt
             """,
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         )
         text_rels = text_rels_result.records[0]["cnt"]
 
@@ -577,7 +583,7 @@ def save_to_neo4j(doc_structure: DocumentStructure, uri, user, password):
             CREATE (c)-[:HAS_ELEMENT]->(t)
             RETURN count(*) as cnt
             """,
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         )
         table_rels = table_rels_result.records[0]["cnt"]
 
@@ -590,7 +596,7 @@ def save_to_neo4j(doc_structure: DocumentStructure, uri, user, password):
             WHERE toc.parent_id IS NULL
             CREATE (d)-[:HAS_TOC]->(toc)
             """,
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         )
 
     finally:
