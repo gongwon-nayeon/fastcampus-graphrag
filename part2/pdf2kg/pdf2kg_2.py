@@ -11,6 +11,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# ============================================
+# 환경 변수 설정
+# ============================================
+
+NEO4J_DATABASE = os.getenv("NEO4J_USERNAME")
+
 
 # ============================================
 # 데이터 클래스
@@ -61,7 +67,7 @@ def get_chunks(driver, max_chunks: int = 100) -> List[Dict]:
     records, summary, keys = driver.execute_query(
         query,
         {"limit": max_chunks},
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     )
     return [dict(record) for record in records]
 
@@ -351,7 +357,7 @@ def create_entity_node(driver, entity: Entity, entity_name_to_id: Dict[str, str]
         driver.execute_query(
             query,
             {"name": entity.name, "entity_id": entity_node_id, "properties": entity.properties},
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         )
         entity_name_to_id[entity_key] = entity_node_id
         return entity_node_id
@@ -384,7 +390,7 @@ def create_relationship(driver, rel: Relationship, entity_name_to_id: Dict[str, 
         driver.execute_query(
             query,
             {"source_name": rel.source_name, "target_name": rel.target_name, "properties": rel.properties},
-            database_="neo4j"
+            database_=NEO4J_DATABASE
         )
     except Exception as e:
         print(f"   관계 생성 실패 ({safe_rel_type}): {e}")
@@ -400,7 +406,7 @@ def link_entity_to_chunk(driver, entity_name: str, chunk_id: str):
     driver.execute_query(
         query,
         {"entity_name": entity_name, "chunk_id": chunk_id},
-        database_="neo4j"
+        database_=NEO4J_DATABASE
     )
 
 
@@ -495,7 +501,7 @@ def print_graph_stats(driver):
     RETURN labels(n)[0] AS label, count(n) AS count
     ORDER BY count DESC
     """
-    records, summary, keys = driver.execute_query(node_query, database_="neo4j")
+    records, summary, keys = driver.execute_query(node_query, database_=NEO4J_DATABASE)
     nodes = [dict(record) for record in records]
     print("\n노드 타입별 개수:")
     for row in nodes:
@@ -507,7 +513,7 @@ def print_graph_stats(driver):
     RETURN type(r) AS rel_type, count(r) AS count
     ORDER BY count DESC
     """
-    records, summary, keys = driver.execute_query(rel_query, database_="neo4j")
+    records, summary, keys = driver.execute_query(rel_query, database_=NEO4J_DATABASE)
     rels = [dict(record) for record in records]
     print("\n관계 타입별 개수:")
     for row in rels:
@@ -520,7 +526,7 @@ def print_graph_stats(driver):
     RETURN labels(n)[0] AS entity_type, count(n) AS count
     ORDER BY count DESC
     """
-    records, summary, keys = driver.execute_query(entity_type_query, database_="neo4j")
+    records, summary, keys = driver.execute_query(entity_type_query, database_=NEO4J_DATABASE)
     entity_types = [dict(record) for record in records]
     if entity_types:
         print("\n도메인 엔티티 타입별 개수:")
