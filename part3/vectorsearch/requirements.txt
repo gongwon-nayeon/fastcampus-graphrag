@@ -1,0 +1,5 @@
+neo4j==5.28.3
+neo4j-graphrag==1.14.0
+python-dotenv==1.2.2
+jupyter==1.1.1
+ipykernel==7.2.0
