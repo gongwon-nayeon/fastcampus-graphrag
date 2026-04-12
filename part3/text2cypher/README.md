@@ -69,3 +69,60 @@ cp .env.example .env
 OPENAI_API_KEY=sk-your_openai_api_key_here
 ```
 
+---
+
+# Text2Cypher 기반 GraphRAG 구축
+
+**Part 3. GraphRAG 핵심 패턴과 평가**
+- Chapter 01. GraphRAG 구축하기
+    - 📒 Clip 03. [프로젝트] Text2Cypher - 쿼리 생성, 조회, 답변 파이프라인으로 GraphRAG 구현하기
+
+> 자연어 질문을 Cypher 쿼리로 변환하는 Text2Cypher 기법을 학습하고, Neo4j GraphRAG 패키지를 활용하여 타이타닉 데이터 기반 질의응답 시스템을 구축합니다.
+
+
+### `text2cypher.py`
+- Neo4j 데이터베이스 연결 및 실제 쿼리 실행
+- Text2Cypher Retriever + GraphRAG 파이프라인 구현
+- 쿼리 생성 → 실행 → 답변 생성 전체 과정 자동화
+
+
+
+### 1. 환경변수 설정
+
+```bash
+# .env 파일 생성
+cp .env.example .env  # Linux/macOS
+copy .env.example .env  # Windows
+```
+
+`.env` 파일 편집:
+
+```bash
+# Neo4j 데이터베이스 연결 정보 (text2cypher.py 실행시 필요)
+NEO4J_URI=neo4j+s://your-instance.databases.neo4j.io
+NEO4J_USERNAME=neo4j
+NEO4J_PASSWORD=your_password_here
+
+# OpenAI API Key
+OPENAI_API_KEY=sk-your_openai_api_key_here
+```
+
+### 2. 타이타닉 데이터 로드 (선행 작업)
+
+text2cypher.py를 실행하기 전에 타이타닉 데이터를 Neo4j에 로드해야 합니다:
+
+```bash
+# part2/csv2kg 폴더로 이동
+cd ../../part2/csv2kg
+
+# 데이터 로드 실행
+python csv2kg.py
+```
+
+---
+
+### 3. Text2Cypher 기반 GraphRAG 실행
+
+```bash
+python text2cypher.py
+```
