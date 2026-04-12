@@ -1,0 +1,9 @@
+[project]
+name = "graph-fastcampus-part3-qdrantcypher"
+version = "0.1.0"
+dependencies = [
+    "neo4j~=5.28",
+    "neo4j-graphrag[openai]>=1.10.0",
+    "neo4j-graphrag[qdrant]",
+    "python-dotenv>=1.0.0"
+]
