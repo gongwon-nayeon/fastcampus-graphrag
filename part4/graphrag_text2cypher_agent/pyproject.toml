@@ -1,0 +1,13 @@
+[project]
+name = "text2cypher-agent"
+version = "0.1.0"
+description = "의료 지식 그래프 기반 Text2Cypher Agent (LangGraph)"
+dependencies = [
+    "langchain-community",
+    "langchain-core>=1.0.0",
+    "langchain-openai>=1.0.0",
+    "langgraph>=1.0.0",
+    "langgraph-cli[inmem]>=0.4.0",
+    "neo4j>=5.28.3",
+    "python-dotenv>=1.2.2",
+]

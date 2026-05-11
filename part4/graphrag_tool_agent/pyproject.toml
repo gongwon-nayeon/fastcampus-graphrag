@@ -1,0 +1,12 @@
+[project]
+name = "graphrag-tool-agent"
+version = "0.1.0"
+description = "LangChain create_agent 기반 GraphRAG 도구 에이전트"
+dependencies = [
+    "neo4j>=5.28.3",
+    "neo4j-graphrag>=1.14.1",
+    "python-dotenv>=1.2.2",
+    "langchain>=1.0.0",
+    "langchain-openai>=1.0.0",
+    "langgraph>=1.0.0",
+]

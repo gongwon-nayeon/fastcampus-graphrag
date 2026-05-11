@@ -1,0 +1,10 @@
+[project]
+name = "graph-fastcampus-part4-createagent"
+version = "0.1.0"
+dependencies = [
+    "langchain>=1.0.0",
+    "langchain-openai>=1.0.0",
+    "python-dotenv>=1.0.0",
+    "jupyter>=1.0.0",
+    "ipykernel>=6.0.0",
+]
