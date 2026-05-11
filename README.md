@@ -14,13 +14,28 @@ Python version: 3.13
  ┃ ┣ 📂retail2kg
  ┃ ┗ 📂medical2kg
  ┣ 📂part3
- ┃ ┗ 📂text2cypher
+ ┃ ┣ 📂community_search
+ ┃ ┣ 📂evaluation
+ ┃ ┃ ┣ 📂neo4j_text2cypher
+ ┃ ┃ ┗ 📂ragas
+ ┃ ┣ 📂reasoning
+ ┃ ┣ 📂text2cypher
+ ┃ ┣ 📂toolsretriever
+ ┃ ┣ 📂vectorcypher
+ ┃ ┣ 📂vectorcypher_qdrant
+ ┃ ┗ 📂vectorsearch
+ ┣ 📂part4
+ ┃ ┣ 📂create_agent
+ ┃ ┣ 📂final_chatbot
+ ┃ ┣ 📂graphrag_text2cypher_agent
+ ┃ ┣ 📂graphrag_tool_agent
+ ┃ ┗ 📂streamlit
  ┗ 📜README.md
  ```
 - 1차 오픈 (2/23) ✓
 - 2차 오픈 (3/30) ✓
 - 3차 오픈 (4/27) ✓
-- 최종 오픈 (5/27)
+- 최종 오픈 (5/27) ✓
 
 ---
 
