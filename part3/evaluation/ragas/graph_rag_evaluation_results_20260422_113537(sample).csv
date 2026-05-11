@@ -1,0 +1,30 @@
+user_input,response,reference,faithfulness,answer_relevancy,context_recall,context_precision,answer_accuracy
+톰 행크스는 몇 편의 영화에 출연했나요?,톰 행크스는 43편의 영화에 출연했습니다.,톰 행크스는 38편의 영화에 출연했습니다.,0.0,0.3557706075547238,0.0,0.0,0.25
+가장 높은 평점을 받은 상위 5개의 영화는 무엇인가요?,"1. Band of Brothers - 9.6
+2. Civil War, The - 9.5
+3. Cosmos - 9.3
+4. Shawshank Redemption, The - 9.3
+5. Decalogue, The (Dekalog) - 9.2","가장 높은 평점을 받은 상위 5개의 영화는 다음과 같습니다: Band of Brothers - 9.6; Civil War, The - 9.5; Cosmos - 9.3; Shawshank Redemption, The - 9.3; Decalogue, The (Dekalog) - 9.2",1.0,0.5144366306216861,1.0,0.9999999999,1.0
+매트릭스와 매트릭스 리로디드에 모두 출연한 배우는 누구인가요?,매트릭스와 매트릭스 리로디드에 모두 출연한 배우는 Carrie-Anne Moss와 Keanu Reeves입니다.,"매트릭스와 매트릭스 리로디드에 모두 출연한 배우는 다음과 같습니다: Carrie-Anne Moss, Keanu Reeves",1.0,0.24387602084849033,1.0,0.9999999999,1.0
+1999년에 개봉한 영화는 무엇인가요?,"- 10 Things I Hate About You
+- 13th Warrior, The
+- 200 Cigarettes","1999년에 개봉한 영화는 다음과 같습니다: 10 Things I Hate About You, 13th Warrior, The, 200 Cigarettes, 24 Hour Woman, The, 8 ½ Women (a.k.a. 8 1/2 Women) (a.k.a. Eight and a Half Women)",1.0,0.2882542137547981,0.0,0.9999999999,0.5
+포레스트 검프는 어떤 장르에 속하나요?,"포레스트 검프는 코미디, 드라마, 로맨스, 전쟁 장르에 속합니다.",포레스트 검프 영화와 장르는 다음과 같습니다: Forrest Gump - Comedy; Forrest Gump - Drama; Forrest Gump - Romance; Forrest Gump - War,1.0,0.9867110928247023,1.0,0.9999999999,1.0
+가장 많은 영화를 감독한 감독은 누구인가요?,Woody Allen은 42편의 영화를 감독했습니다.,가장 많은 영화를 감독한 감독은 Woody Allen - 42입니다.,1.0,0.3657247334789859,1.0,0.9999999999,1.0
+펄프 픽션에 출연한 배우는 누구인가요?,"펄프 픽션에 출연한 배우는 John Travolta, Laura Lovelace, Samuel L. Jackson, Tim Roth입니다.",펄프 픽션 영화와 출연 배우는 다음과 같습니다: Pulp Fiction - John Travolta; Pulp Fiction - Laura Lovelace; Pulp Fiction - Samuel L. Jackson; Pulp Fiction - Tim Roth,1.0,0.26055730215711587,1.0,0.9999999999,1.0
+매트릭스에서 누가 연기했나요?,"'매트릭스'에서 연기한 배우들은 Keanu Reeves, Carrie-Anne Moss, Hugo Weaving, Laurence Fishburne입니다.","매트릭스 시리즈 영화들과 출연 배우는 다음과 같습니다: Matrix Reloaded, The - Andy Arness; Matrix Reloaded, The - Carrie-Anne Moss; Matrix Reloaded, The - Christine Anu; Matrix Reloaded, The - Keanu Reeves; Matrix Revolutions, The - Helmut Bakaitis; Matrix Revolutions, The - Kate Beahan; Matrix Revolutions, The - Keanu Reeves; Matrix Revolutions, The - Mary Alice; Matrix, The - Carrie-Anne Moss; Matrix, The - Hugo Weaving; Matrix, The - Keanu Reeves; Matrix, The - Laurence Fishburne",1.0,0.2006164010794064,1.0,0.9999999999,0.5
+매트릭스를 누가 감독했나요?,"'매트릭스' 시리즈의 감독은 다음과 같습니다:
+
+- '매트릭스' (The Matrix): Lilly Wachowski, Lana Wachowski
+- '매트릭스 리로디드' (The Matrix Reloaded): Lilly Wachowski, Lana Wachowski
+- '매트릭스 레볼루션' (The Matrix Revolutions): Lilly Wachowski, Lana Wachowski","매트릭스 시리즈 영화들과 감독은 다음과 같습니다: Matrix Reloaded, The -  Lilly Wachowski; Matrix Reloaded, The - Lana Wachowski; Matrix Revolutions, The -  Lilly Wachowski; Matrix Revolutions, The - Lana Wachowski; Matrix, The -  Lilly Wachowski; Matrix, The - Lana Wachowski",1.0,0.2693268778101134,1.0,0.9999999999,1.0
+인셉션과 장르가 비슷한 영화를 추천해주세요.,"- Hamlet
+- RoboCop
+- Getaway, The
+- Insomnia
+- Get Carter
+- Day the Earth Stood Still, The
+- Shaft
+- Bourne Identity, The
+- Bad Boys
+- Patlabor: The Movie (Kidô keisatsu patorebâ: The Movie)","인셉션과 장르가 비슷한 영화는 다음과 같습니다: RoboCop - 9; Hamlet - 9; Getaway, The - 8; Insomnia - 8; Bad Boys - 7",1.0,0.3614586957237244,1.0,0.9999999999,0.5
