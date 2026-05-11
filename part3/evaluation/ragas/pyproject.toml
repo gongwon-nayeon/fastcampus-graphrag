@@ -1,0 +1,17 @@
+[project]
+name = "graphrag-ragas-evaluation"
+version = "0.1.0"
+description = "RAGAS를 활용한 GraphRAG(Text2Cypher) 평가 파이프라인"
+requires-python = ">=3.11"
+dependencies = [
+    "neo4j>=5.28.3",
+    "neo4j-graphrag>=1.13.1",
+    "python-dotenv>=1.2.2",
+    "openai>=1.109.1",
+    "ragas>=0.4",
+    "datasets>=4.8.0",
+    "langchain-openai>=1.0.0",
+    "jupyter>=1.1.1",
+    "ipykernel>=7.2.0",
+    "pandas>=2.2.3",
+]
